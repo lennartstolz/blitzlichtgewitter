@@ -23,6 +23,9 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "BlitzlichtgewitterTests",
-            dependencies: ["Blitzlichtgewitter"]),
+            dependencies: ["Blitzlichtgewitter"],
+            resources: [
+                .copy("Resources")
+            ]),
     ]
 )
