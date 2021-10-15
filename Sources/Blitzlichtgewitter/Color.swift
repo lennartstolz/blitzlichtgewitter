@@ -20,7 +20,7 @@ public struct Color {
 
     /// Creates a new color from the given components.
     ///
-    /// - Parameters
+    /// - Parameters:
     ///     - red: The red component of the color.
     ///     - green: The green component of the color.
     ///     - blue: The blue component of the color.

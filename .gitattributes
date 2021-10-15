@@ -1,5 +1,9 @@
 # The '.ppm' files shipped with this repository are '.ascii' encoded.
 # Because of that, Github recognizes them as plain text.
 # This introduces a ton of visual noise, as a medium-sized '.ppm'
-# can have more than 50.000 lines easily.
+# can have more than 50.000 lines easily. Unfortunately, GitHub doesn't
+# offer a possibility to exclude files from the statistics completely.
+# 'linguist-generated' ensures that the "Languages" statistics aren't
+# distorted but the number of lines added is still taking those large
+# files into account.
 *.ppm binary linguist-generated=true

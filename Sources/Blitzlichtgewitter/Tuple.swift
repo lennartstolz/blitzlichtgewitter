@@ -40,7 +40,7 @@ public struct Tuple {
 
     /// Creates a new tuple from the given elements.
     ///
-    /// - Parameters
+    /// - Parameters:
     ///     - x: The first element of the tuple.
     ///     - y: The second element of the tuple.
     ///     - z: The third element of the tuple.
