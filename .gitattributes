@@ -1,0 +1,5 @@
+# The '.ppm' files shipped with this repository are '.ascii' encoded.
+# Because of that, Github recognizes them as plain text.
+# This introduces a ton of visual noise, as a medium-sized '.ppm'
+# can have more than 50.000 lines easily.
+*.ppm binary linguist-generated=true
