@@ -43,6 +43,25 @@ extension Color : ExpressibleByArrayLiteral {
 
 }
 
+extension Color {
+
+    /// A color object in the RGB color space with (1,1,1) components.
+    public static let white = Self(red: 1, green: 1, blue: 1)
+
+    /// A color object in the RGB color space with (0,0,0) components.
+    public static let black = Self(red: 0, green: 0, blue: 0)
+
+    /// A color object in the RGB color space with (1,0,0) components.
+    public static let red = Self(red: 1, green: 0, blue: 0)
+
+    /// A color object in the RGB color space with (0,1,0) components.
+    public static let green = Self(red: 0, green: 1, blue: 0)
+
+    /// A color object in the RGB color space with (0,0,1) components.
+    public static let blue = Self(red: 0, green: 0, blue: 1)
+
+}
+
 // MARK: - Operations
 
 // MARK: Comparing Colors
