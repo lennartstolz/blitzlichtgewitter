@@ -55,3 +55,15 @@ final class Matrix2x2ComparisonTests : XCTestCase {
     }
 
 }
+
+final class Matrix2x2DeterminantsTests : XCTestCase {
+
+    func testCalculatingTheDeterminantOfA2x2Matrix() {
+        let a = Matrix2x2(rows: [
+            [  1,  5 ],
+            [ -3,  2 ]
+        ])
+        XCTAssertEqual(a.determinant, 17)
+    }
+
+}
