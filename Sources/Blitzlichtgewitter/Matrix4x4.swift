@@ -124,3 +124,18 @@ extension Matrix4x4 {
     }
 
 }
+
+// MARK: Submatrices
+
+extension Matrix4x4 : _HasSubmatrices {
+
+    /// Returns the resulting matrix after deleting the given row and column.
+    ///
+    /// - Parameters:
+    ///     - row: The row to delete.
+    ///     - column: The column to delete.
+    ///
+    /// - Returns: The resulting matrix after deleting the given row and column
+    public func submatrix(_ row: Int, _ column: Int) -> Matrix3x3 { _submatrix(row, column) }
+
+}
