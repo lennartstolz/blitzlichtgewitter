@@ -67,3 +67,20 @@ final class Matrix3x3ComparisonTests : XCTestCase {
     }
 
 }
+
+final class Matrix3x3SubmatricesTests : XCTestCase {
+
+    func testASubmatrixOfA3x3MatrixIsA2x2Matrix() {
+        let a = Matrix3x3(rows: [
+            [  1,   5,   0 ],
+            [ -3,   2,   7 ],
+            [  0,   6,  -3 ],
+        ])
+        let s = Matrix2x2(rows: [
+            [ -3,  2 ],
+            [  0,  6 ],
+        ])
+        XCTAssertEqual(a.submatrix(0, 2), s)
+    }
+
+}

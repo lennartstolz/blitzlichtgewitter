@@ -16,3 +16,18 @@ extension Matrix3x3 : _Matrix {
     static let size: Size = (3,3)
 
 }
+
+// MARK: Submatrices
+
+extension Matrix3x3 : _HasSubmatrices {
+
+    /// Returns the resulting matrix after deleting the given row and column.
+    ///
+    /// - Parameters:
+    ///     - row: The row to delete.
+    ///     - column: The column to delete.
+    ///
+    /// - Returns: The resulting matrix after deleting the given row and column
+    public func submatrix(_ row: Int, _ column: Int) -> Matrix2x2 { _submatrix(row, column) }
+
+}

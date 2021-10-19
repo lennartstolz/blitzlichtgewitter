@@ -134,3 +134,46 @@ fileprivate extension Double {
     static func equal(_ lhs: Self, _ rhs: Self) -> Bool { abs(lhs - rhs) < 0.00001 }
 
 }
+
+// MARK: Submatrices
+
+/// An interface to provide the shared functionality of the matrices with submatrices (4x4 and 3x3 matrices).
+protocol _HasSubmatrices : _Matrix {
+
+    /// The type of the submatrix after removing the row & column.
+    /// The submatrix of a 3x3 matrix is a 2x2 matrix.
+    associatedtype Submatrix : _Matrix
+
+    /// Returns the resulting matrix after deleting the given row and column.
+    ///
+    /// - Parameters:
+    ///     - row: The row to delete.
+    ///     - column: The column to delete.
+    ///
+    /// - Returns: The resulting matrix after deleting the given row and column
+    func submatrix(_ row: Int, _ column: Int) -> Submatrix
+
+}
+
+extension _HasSubmatrices {
+
+    /// The (hidden) _default_ implementation of the protocols' ``submatrix`` method.
+    /// - Parameters:
+    ///     - row: The row to delete.
+    ///     - column: The column to delete.
+    ///
+    /// - Returns: The resulting matrix after deleting the given row and column
+    func _submatrix(_ row: Int, _ column: Int) -> Submatrix {
+        // This solution is based on `_Matrix` implementation details, in particular the order in which the values
+        // are stored in the `elements` list. If this order changes, we do need to adjust this algorithm, too.
+        var elements = [Submatrix.Scalar]()
+        for r in 0..<Self.size.rows {
+            for c in 0..<Self.size.columns {
+                guard r != row && c != column else { continue }
+                elements.append(self[r, c])
+            }
+        }
+        return Submatrix(elements: elements)
+    }
+
+}
