@@ -84,3 +84,22 @@ final class Matrix3x3SubmatricesTests : XCTestCase {
     }
 
 }
+
+final class Matrix3x3MinorTests : XCTestCase {
+
+    func testCalculatingAMinorOfA3x3Matrix() {
+        let a = Matrix3x3(rows: [
+            [ 3,   5,   0 ],
+            [ 2,  -1,  -7 ],
+            [ 6,  -1,   5 ],
+        ])
+        let s = Matrix2x2(rows: [
+            [  5,  0 ],
+            [ -1,  5 ],
+        ])
+        XCTAssertEqual(a.submatrix(1, 0), s)
+        XCTAssertEqual(s.determinant, 25)
+        XCTAssertEqual(a.minor(1, 0), 25)
+    }
+
+}
