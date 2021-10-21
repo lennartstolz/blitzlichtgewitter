@@ -103,3 +103,19 @@ final class Matrix3x3MinorTests : XCTestCase {
     }
 
 }
+
+final class Matrix3x3CofactorTests : XCTestCase {
+
+    func testCalculatingACofactorOfA3x3Matrix() {
+        let a = Matrix3x3(rows: [
+            [ 3,   5,   0 ],
+            [ 2,  -1,  -7 ],
+            [ 6,  -1,   5 ],
+        ])
+        XCTAssertEqual(a.minor(0, 0), -12)
+        XCTAssertEqual(a.cofactor(0, 0), -12)
+        XCTAssertEqual(a.minor(1, 0), 25)
+        XCTAssertEqual(a.cofactor(1, 0), -25)
+    }
+
+}
