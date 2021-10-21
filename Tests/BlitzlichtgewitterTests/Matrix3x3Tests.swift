@@ -119,3 +119,19 @@ final class Matrix3x3CofactorTests : XCTestCase {
     }
 
 }
+
+final class Matrix3x3DeterminantTests : XCTestCase {
+
+    func testCalculatingTheDeterminantOfA3x3Matrix() {
+        let a = Matrix3x3(rows: [
+            [  1,   2,   6 ],
+            [ -5,   8,  -4 ],
+            [  2,   6,   4 ],
+        ])
+        XCTAssertEqual(a.cofactor(0, 0), 56)
+        XCTAssertEqual(a.cofactor(0, 1), 12)
+        XCTAssertEqual(a.cofactor(0, 2), -46)
+        XCTAssertEqual(a.determinant, -196)
+    }
+
+}

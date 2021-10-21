@@ -139,3 +139,78 @@ extension Matrix4x4 : _HasSubmatrices {
     public func submatrix(_ row: Int, _ column: Int) -> Matrix3x3 { _submatrix(row, column) }
 
 }
+
+// MARK: Minors
+
+extension Matrix4x4 {
+
+    /// Returns the minor (the determinant of the submatrix at the given `row` and `column`).
+    ///
+    /// - Parameters:
+    ///     - row: The row of the submatrix to determine the minor.
+    ///     - column: The column of the submatrix to determine the minor.
+    ///
+    /// - Returns: he minor (the determinant of the submatrix at at `row`/`column`).
+    public func minor(_ row: Int, _ column: Int) -> Scalar {
+        submatrix(row, column).determinant
+    }
+
+}
+
+// MARK: Cofactors
+
+extension Matrix4x4 {
+
+    /// Returns the cofactor of the given row and column.
+    ///
+    /// - Parameters:
+    ///     - row: The row to determine the cofactor.
+    ///     - column: The column determine the cofactor.
+    ///
+    /// The cofactor of the matrix is a (potentially) negated minor of the 3x3 matrix.
+    /// It is negated for all (`row`/`column`) combinations where their element in the given matrix is `-`.
+    ///
+    /// ```
+    /// [ +  -  + - ]
+    /// [ +  -  + - ]
+    /// [ +  -  + - ]
+    /// ```
+    ///
+    /// - Returns the cofactor of the given row and column.
+    public func cofactor(_ row: Int, _ column: Int) -> Scalar {
+        let minor = minor(row, column)
+        return (row + column).isOdd ? -minor : minor
+    }
+
+}
+
+private extension Int {
+
+    /// Returns true if the value represents an odd number.
+    var isOdd : Bool { !isEven }
+
+    /// Returns true if the value represents an even number.
+    var isEven : Bool { self % 2 == 0 }
+
+}
+
+// MARK: Determinants
+
+extension Matrix4x4 {
+
+    /// The determinant of the matrix.
+    ///
+    /// The determinant is a number that is derived from the elements of a matrix. The name comes from the use of
+    /// matrices to solve systems of equations, where it's used to _determine_ whether or not the system has a solution.
+    /// If the determinant is zero, then the corresponding system of equations has no solution.
+    ///
+    /// [The Ray Tracer Challenge pp. 34](http://raytracerchallenge.com/)
+    public var determinant : Scalar {
+        var det: Scalar = 0
+        for c in 0..<4 {
+            det += self[0, c] * cofactor(0, c)
+        }
+        return det
+    }
+
+}
