@@ -31,3 +31,20 @@ extension Matrix3x3 : _HasSubmatrices {
     public func submatrix(_ row: Int, _ column: Int) -> Matrix2x2 { _submatrix(row, column) }
 
 }
+
+// MARK: Minors
+
+extension Matrix3x3 {
+
+    /// Returns the minor (the determinant of the submatrix at the given `row` and `column`).
+    ///
+    /// - Parameters
+    ///     - row: The row of the submatrix to determine the minor.
+    ///     - column: The column of the submatrix to determine the minor.
+    ///
+    /// - Returns: he minor (the determinant of the submatrix at at `row`/`column`).
+    public func minor(_ row: Int, _ column: Int) -> Scalar {
+        submatrix(row, column).determinant
+    }
+
+}
