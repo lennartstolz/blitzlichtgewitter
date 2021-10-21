@@ -17,7 +17,7 @@ extension Matrix2x2 : _Matrix {
 
 }
 
-// MARK: Determining Determinants
+// MARK: Determinants
 
 extension Matrix2x2 {
 

@@ -197,3 +197,21 @@ final class Matrix4x4SubmatricesTests : XCTestCase {
     }
 
 }
+
+final class Matrix4x4DeterminantTests : XCTestCase {
+
+    func testCalculatingTheDeterminantOfA4x4Matrix() {
+        let a = Matrix4x4(rows: [
+            [ -2,  -8,   3,   5 ],
+            [ -3,   1,   7,   3 ],
+            [  1,   2,  -9,   6 ],
+            [ -6,   7,   7,  -9 ],
+        ])
+        XCTAssertEqual(a.cofactor(0, 0), 690)
+        XCTAssertEqual(a.cofactor(0, 1), 447)
+        XCTAssertEqual(a.cofactor(0, 2), 210)
+        XCTAssertEqual(a.cofactor(0, 3), 51)
+        XCTAssertEqual(a.determinant, -4071)
+    }
+
+}

@@ -86,3 +86,24 @@ private extension Int {
     var isEven : Bool { self % 2 == 0 }
 
 }
+
+// MARK: Determinants
+
+extension Matrix3x3 {
+
+    /// The determinant of the matrix.
+    ///
+    /// The determinant is a number that is derived from the elements of a matrix. The name comes from the use of
+    /// matrices to solve systems of equations, where it's used to _determine_ whether or not the system has a solution.
+    /// If the determinant is zero, then the corresponding system of equations has no solution.
+    ///
+    /// [The Ray Tracer Challenge pp. 34](http://raytracerchallenge.com/)
+    public var determinant : Scalar {
+        var det: Scalar = 0
+        for c in 0..<3 {
+            det += self[0, c] * cofactor(0, c)
+        }
+        return det
+    }
+
+}
