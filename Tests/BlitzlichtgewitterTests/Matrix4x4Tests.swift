@@ -414,3 +414,30 @@ final class Matrix4x4ScalingTests : XCTestCase {
     }
 
 }
+
+final class Matrix4x4RotationTests : XCTestCase {
+
+    func testRotatingAPointAroundTheXAxisByRadians() {
+        let p = point(0, 1, 0)
+        let half_quarter = rotation_x(rad: .pi / 4)
+        let full_quarter = rotation_x(rad: .pi / 2)
+        XCTAssertEqual(half_quarter * p, point(0, sqrt(2) / 2, sqrt(2) / 2))
+        XCTAssertEqual(full_quarter * p, point(0, 0, 1))
+    }
+
+    func testRotatingAPointAroundTheXAxisByDegrees() {
+        let p = point(0, 1, 0)
+        let half_quarter = rotation_x(deg: 45)
+        let full_quarter = rotation_x(deg: 90)
+        XCTAssertEqual(half_quarter * p, point(0, sqrt(2) / 2, sqrt(2) / 2))
+        XCTAssertEqual(full_quarter * p, point(0, 0, 1))
+    }
+
+    func testTheInverseOfAnXRotationRotatesInTheOppositeDirection() {
+        let p = point(0, 1, 0)
+        let half_quarter = rotation_x(rad: .pi / 4)
+        let inv = half_quarter.inverse
+        XCTAssertEqual(inv * p, point(0, sqrt(2) / 2, -sqrt(2) / 2))
+    }
+
+}
