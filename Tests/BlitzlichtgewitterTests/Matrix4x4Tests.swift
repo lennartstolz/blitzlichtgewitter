@@ -215,3 +215,150 @@ final class Matrix4x4DeterminantTests : XCTestCase {
     }
 
 }
+
+final class Matrix4x4InversionTests : XCTestCase {
+
+    func testTestingAnInvertibleMAtrixForInvertibility() {
+        let a = Matrix4x4(rows: [
+            [ 6,   4,   4,   4 ],
+            [ 5,   5,   7,   6 ],
+            [ 4,  -9,   3,  -7 ],
+            [ 9,   1,   7,  -6 ],
+        ])
+        XCTAssertEqual(a.determinant, -2120)
+        XCTAssertTrue(a.isInvertible)
+    }
+
+    func testTestingANoninvertibleMatrixForInvertibility() {
+        let a = Matrix4x4(rows: [
+            [ -4,   2,  -2,  -3 ],
+            [  9,   6,   2,   6 ],
+            [  0,  -5,   1,  -5 ],
+            [  0,   0,   0,   0 ],
+        ])
+        XCTAssertEqual(a.determinant, 0)
+        XCTAssertFalse(a.isInvertible)
+    }
+
+    func testCalculatingTheInverseOfAMatrix() {
+        let a = Matrix4x4(rows: [
+            [ -5,   2,   6,  -8 ],
+            [  1,  -5,   1,   8 ],
+            [  7,   7,  -6,  -7 ],
+            [  1,  -3,   7,   4 ],
+        ])
+        let b = a.inverse
+        XCTAssertEqual(a.determinant, 532)
+        XCTAssertEqual(a.cofactor(2, 3), -160)
+        XCTAssertEqual(b[3,2], -160/532)
+        XCTAssertEqual(a.cofactor(3, 2), 105)
+        XCTAssertEqual(b[2,3], 105/532)
+        let i = Matrix4x4(rows: [
+            [  0.21805,   0.45113,   0.24060,  -0.04511 ],
+            [ -0.80827,  -1.45677,  -0.44361,   0.52068 ],
+            [ -0.07895,  -0.22368,  -0.05263,   0.19737 ],
+            [ -0.52256,  -0.81391,  -0.30075,   0.30639 ],
+        ])
+        XCTAssertEqual(b, i)
+    }
+
+    func testCalculatingTheInverseOfAnotherMatrix() {
+        var a = Matrix4x4(rows: [
+            [  8,  -5,   9,   2 ],
+            [  7,   5,   6,   1 ],
+            [ -6,   0,   9,   6 ],
+            [ -3,   0,  -9,  -4 ],
+        ])
+        let i = Matrix4x4(rows: [
+            [ -0.15385,  -0.15385,  -0.28205,  -0.53846 ],
+            [ -0.07692,   0.12308,   0.02564,   0.03077 ],
+            [  0.35897,   0.35897,   0.43590,   0.92308 ],
+            [ -0.69231,  -0.69231,  -0.76923,  -1.92308 ],
+        ])
+        a.invert()
+        XCTAssertEqual(a, i)
+    }
+
+    func testCalculatingTheInverseOfAThirdMatrix() {
+        var a = Matrix4x4(rows: [
+            [  9,   3,   0,   9 ],
+            [ -5,  -2,  -6,  -3 ],
+            [ -4,   9,   6,   4 ],
+            [ -7,   6,   6,   2 ],
+        ])
+        let i = Matrix4x4(rows: [
+            [ -0.04074,  -0.07778,   0.14444,  -0.22222 ],
+            [ -0.07778,   0.03333,   0.36667,  -0.33333 ],
+            [ -0.02901,  -0.14630,  -0.10926,   0.12963 ],
+            [  0.17778,   0.06667,  -0.26667,   0.33333 ],
+        ])
+        a.invert()
+        XCTAssertEqual(a, i)
+    }
+
+    func testMultiplyingAProductByItsInverse() {
+        let a = Matrix4x4(rows: [
+            [  3,  -9,   7,   3 ],
+            [  3,  -8,   2,  -9 ],
+            [ -4,   4,   4,   1 ],
+            [ -6,   5,  -1,   1 ],
+        ])
+        let b = Matrix4x4(rows: [
+            [  8,   2,   2,   2 ],
+            [  3,  -1,   7,   0 ],
+            [  7,   0,   5,   4 ],
+            [  6,  -2,   0,   5 ],
+        ])
+        let c = a * b
+        XCTAssertEqual(c * b.inverse, a)
+    }
+
+}
+
+// MARK: Chapter 3 - Putting it Together
+
+final class Matrix4x4ExperimentationTests : XCTestCase {
+
+    func testTheInverseOfTheIdentityMatrixIsTheIdentityMatrix() {
+        let a = Matrix4x4.identity
+        XCTAssertEqual(a.inverse, a)
+    }
+
+    func testMultiplyingAMatrixByItsInverseReturnsTheIdentityMatrix() {
+        let a = Matrix4x4(rows: [
+            [  8,   2,   2,   2 ],
+            [  3,  -1,   7,   0 ],
+            [  7,   0,   5,   4 ],
+            [  6,  -2,   0,   5 ],
+        ])
+        let i = Matrix4x4(rows: [
+            [   0.21428571428571427,   0.14285714285714285,   -0.2857142857142857,   0.14285714285714285 ],
+            [ -0.005291005291005291,  -0.31216931216931215,   0.43915343915343913,   -0.3492063492063492 ],
+            [  -0.09259259259259259,  0.037037037037037035,   0.18518518518518517,   -0.1111111111111111 ],
+            [  -0.25925925925925924,   -0.2962962962962963,    0.5185185185185185,   -0.1111111111111111 ],
+        ])
+        XCTAssertEqual(a * i, Matrix4x4.identity)
+    }
+
+    func testTheTransposeOfTheInverseIsEqualToTheInverseOfTheTranspose() {
+        let a = Matrix4x4(rows: [
+            [  8,   2,   2,   2 ],
+            [  3,  -1,   7,   0 ],
+            [  7,   0,   5,   4 ],
+            [  6,  -2,   0,   5 ],
+        ])
+        let b = a.inverse.transposed()
+        let c = a.transposed().inverse
+        XCTAssertEqual(b, c)
+    }
+
+    func testModifyingTheIdentityMatrixAndMultiplyingItWithATuple() {
+        var m = Matrix4x4.identity
+        m[1, 1] = 14
+
+        var t = tuple(1, 2, 3, 4)
+        t = m * t
+        XCTAssertEqual(t, tuple(1, 28, 3, 4))
+    }
+
+}
