@@ -366,22 +366,51 @@ final class Matrix4x4ExperimentationTests : XCTestCase {
 final class Matrix4x4TranslationTests  : XCTestCase {
 
     func testMultiplyingByATranslationMatrix() {
-        let t = translation(5, -3, 2)
+        let transform = translation(5, -3, 2)
         let p = point(-3, 4, 5)
-        XCTAssertEqual(t * p, point(2, 1, 7))
+        XCTAssertEqual(transform * p, point(2, 1, 7))
     }
 
     func testMultiplyingByTheInverseOfATranslationMatrix() {
-        let t = translation(5, -3, 2)
-        let i = t.inverse
+        let transform = translation(5, -3, 2)
+        let i = transform.inverse
         let p = point(-3, 4, 5)
         XCTAssertEqual(i * p, point(-8, 7, 3))
     }
 
     func testTranslationDoesNotAffectVectors() {
-        let t = translation(5, -3, 2)
+        let transform = translation(5, -3, 2)
         let v = vector(-3, 4, 5)
-        XCTAssertEqual(t * v, v)
+        XCTAssertEqual(transform * v, v)
+    }
+
+}
+
+final class Matrix4x4ScalingTests : XCTestCase {
+
+    func testAScalingMatrixAppliedToAPoint() {
+        let transform = scaling(2, 3, 4)
+        let p = point(-4, 6, 8)
+        XCTAssertEqual(transform * p, point(-8, 18, 32))
+    }
+
+    func testAScalingMatrixAppliedToAVector() {
+        let transform = scaling(2, 3, 4)
+        let v = vector(-4, 6, 8)
+        XCTAssertEqual(transform * v, vector(-8, 18, 32))
+    }
+
+    func testMultiplyingByTheInverseOfAScalingMatrix() {
+        let transform = scaling(2, 3, 4)
+        let inv = transform.inverse
+        let v = vector(-4, 6, 8)
+        XCTAssertEqual(inv * v, vector(-2, 2, 2))
+    }
+
+    func testReflectionIsScalingByANegativeValue() {
+        let transform = scaling(-1, 1, 1)
+        let p = point(2, 3, 4)
+        XCTAssertEqual(transform * p, point(-2, 3, 4))
     }
 
 }
