@@ -362,3 +362,26 @@ final class Matrix4x4ExperimentationTests : XCTestCase {
     }
 
 }
+
+final class Matrix4x4TranslationTests  : XCTestCase {
+
+    func testMultiplyingByATranslationMatrix() {
+        let t = translation(5, -3, 2)
+        let p = point(-3, 4, 5)
+        XCTAssertEqual(t * p, point(2, 1, 7))
+    }
+
+    func testMultiplyingByTheInverseOfATranslationMatrix() {
+        let t = translation(5, -3, 2)
+        let i = t.inverse
+        let p = point(-3, 4, 5)
+        XCTAssertEqual(i * p, point(-8, 7, 3))
+    }
+
+    func testTranslationDoesNotAffectVectors() {
+        let t = translation(5, -3, 2)
+        let v = vector(-3, 4, 5)
+        XCTAssertEqual(t * v, v)
+    }
+
+}

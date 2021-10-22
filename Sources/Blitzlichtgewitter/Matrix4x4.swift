@@ -234,3 +234,24 @@ extension Matrix4x4 {
     }
 
 }
+
+// MARK: Translation
+
+/// Translation is a transformation that moves a point.
+///
+/// - Parameters:
+///     - x: The translation of the vectors' `x` element.
+///     - x: The translation of the vectors' `y` element.
+///     - x: The translation of the vectors' `z` element.
+///
+/// - Returns: A translation matrix to perform a transformation to move a point.
+public func translation(_ x: Matrix4x4.Scalar,
+                        _ y: Matrix4x4.Scalar,
+                        _ z: Matrix4x4.Scalar) -> Matrix4x4 {
+    Matrix4x4(rows: [
+        [ 1,  0,  0,  x ],
+        [ 0,  1,  0,  y ],
+        [ 0,  0,  1,  z ],
+        [ 0,  0,  0,  1 ],
+    ])
+}
