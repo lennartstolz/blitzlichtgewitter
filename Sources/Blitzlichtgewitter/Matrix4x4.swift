@@ -255,3 +255,24 @@ public func translation(_ x: Matrix4x4.Scalar,
         [ 0,  0,  0,  1 ],
     ])
 }
+
+// MARK: Scaling
+
+/// Scaling is a transformation that moves a point by multiplication.
+///
+/// - Parameters:
+///     - x: The translation of the vectors' `x` element.
+///     - x: The translation of the vectors' `y` element.
+///     - x: The translation of the vectors' `z` element.
+///
+/// - Returns: A translation matrix to perform a transformation to scale a point.
+public func scaling(_ x: Matrix4x4.Scalar,
+                    _ y: Matrix4x4.Scalar,
+                    _ z: Matrix4x4.Scalar) -> Matrix4x4 {
+    Matrix4x4(rows: [
+        [ x,  0,  0,  0 ],
+        [ 0,  y,  0,  0 ],
+        [ 0,  0,  z,  0 ],
+        [ 0,  0,  0,  1 ],
+    ])
+}
