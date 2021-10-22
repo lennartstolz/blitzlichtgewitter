@@ -440,4 +440,20 @@ final class Matrix4x4RotationTests : XCTestCase {
         XCTAssertEqual(inv * p, point(0, sqrt(2) / 2, -sqrt(2) / 2))
     }
 
+    func testRotatingAPointAroundTheYAxisByRadians() {
+        let p = point(0, 0, 1)
+        let half_quarter = rotation_y(deg: 45)
+        let full_quarter = rotation_y(deg: 90)
+        XCTAssertEqual(half_quarter * p, point(sqrt(2) / 2, 0, sqrt(2) / 2))
+        XCTAssertEqual(full_quarter * p, point(1, 0, 0))
+    }
+
+    func testRotatingAPointAroundTheYAxisByDegrees() {
+        let p = point(0, 0, 1)
+        let two_quarter = rotation_y(deg: 180)
+        let three_quarter = rotation_y(deg: 270)
+        XCTAssertEqual(two_quarter * p, point(0, 0, -1))
+        XCTAssertEqual(three_quarter * p, point(-1, 0, 0))
+    }
+
 }
