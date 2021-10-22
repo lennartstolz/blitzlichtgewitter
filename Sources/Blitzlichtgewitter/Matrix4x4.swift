@@ -214,3 +214,34 @@ extension Matrix4x4 {
     }
 
 }
+
+// MARK: Inversion
+
+extension Matrix4x4 {
+
+    /// A Boolean value indicating whether the instance is invertible.
+    ///
+    /// If the determinant is 0, the matrix is not invertible.
+    public var isInvertible : Bool {  determinant != 0 }
+
+    /// The inverse of the matrix.
+    public var inverse : Matrix4x4 {
+        var m: Self = Self(elements: elements)
+        m.invert()
+        return m
+    }
+
+    /// Replaces the receiver’s matrix with its inverse matrix.
+    public mutating func invert() {
+        let original = self
+        let determinant = self.determinant
+        for row in 0..<4 {
+            for column in 0..<4 {
+                // `[column, row]` perform a `transpose` operation "in-place".
+                self[column, row] = original.cofactor(row, column) / determinant
+            }
+        }
+
+    }
+
+}
