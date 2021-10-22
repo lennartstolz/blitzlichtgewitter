@@ -105,22 +105,11 @@ extension Matrix4x4 {
     /// When you transpose a matrix the rows become columns and the columns become rows.
     public mutating func transpose() {
         let m = self
-        self[0, 0] = m[0, 0]
-        self[0, 1] = m[1, 0]
-        self[0, 2] = m[2, 0]
-        self[0, 3] = m[3, 0]
-        self[1, 0] = m[0, 1]
-        self[1, 1] = m[1, 1]
-        self[1, 2] = m[2, 1]
-        self[1, 3] = m[3, 1]
-        self[2, 0] = m[0, 2]
-        self[2, 1] = m[1, 2]
-        self[2, 2] = m[2, 2]
-        self[2, 3] = m[3, 2]
-        self[3, 0] = m[0, 3]
-        self[3, 1] = m[1, 3]
-        self[3, 2] = m[2, 3]
-        self[3, 3] = m[3, 3]
+        (0...3).forEach { r in
+            (0...3).forEach { c in
+                self[r, c] = m[c, r]
+            }
+        }
     }
 
 }
