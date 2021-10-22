@@ -325,5 +325,28 @@ public func rotation_y(rad r: Matrix4x4.Scalar) -> Matrix4x4 {
 /// - Returns: A rotation matrix to perform the rotation transformation around the y-axis.
 public func rotation_y(deg: Matrix4x4.Scalar) -> Matrix4x4 { rotation_y(rad: radians(deg: deg)) }
 
+/// Multiplying a tuple by this rotation matrix will rotate that tuple around the z-axis.
+///
+/// - Parameters:
+///     - deg: The degrees to rotate around the z-axis.
+///
+/// - Returns: A rotation matrix to perform the rotation transformation around the z-axis.
+public func rotation_z(rad r: Matrix4x4.Scalar) -> Matrix4x4 {
+    Matrix4x4(rows: [
+        [  cos(r),     -sin(r),           0,           0       ],
+        [  sin(r),      cos(r),           0,           0       ],
+        [       0,           0,           1,           0       ],
+        [       0,           0,           0,           1       ],
+    ])
+}
+
+/// Multiplying a tuple by this rotation matrix will rotate that tuple around the z-axis.
+///
+/// - Parameters:
+///     - deg: The degrees to rotate around the z-axis.
+///
+/// - Returns: A rotation matrix to perform the rotation transformation around the z-axis.
+public func rotation_z(deg: Matrix4x4.Scalar) -> Matrix4x4 { rotation_z(rad: radians(deg: deg)) }
+
 /// Transforms the given degrees into a radian value (to be used for rotation transformations.
 private func radians(deg: Matrix4x4.Scalar) -> Matrix4x4.Scalar { (deg / 180) * .pi }
