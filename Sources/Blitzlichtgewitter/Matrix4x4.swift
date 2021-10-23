@@ -350,3 +350,34 @@ public func rotation_z(deg: Matrix4x4.Scalar) -> Matrix4x4 { rotation_z(rad: rad
 
 /// Transforms the given degrees into a radian value (to be used for rotation transformations.
 private func radians(deg: Matrix4x4.Scalar) -> Matrix4x4.Scalar { (deg / 180) * .pi }
+
+// MARK: Shearing
+
+/// Returns a shearing (skew) transformation matrix.
+///
+/// A shearing (or skew) transformation has the effect of making straight lines slanted.
+///
+///[The Ray Tracer Challenge pp. 51](http://raytracerchallenge.com/)
+///
+/// - Parameters:
+///     - xy: Define the shear transformation of x in proportion to y
+///     - xz: Define the shear transformation of x in proportion to z
+///     - yx: Define the shear transformation of y in proportion to x
+///     - yz: Define the shear transformation of y in proportion to z
+///     - zx: Define the shear transformation of z in proportion to x
+///     - zy: Define the shear transformation of y in proportion to y
+///
+/// - Returns: A shearing (skew) transformation matrix.
+public func shearing(_ xy: Matrix4x4.Scalar,
+                     _ xz: Matrix4x4.Scalar,
+                     _ yx: Matrix4x4.Scalar,
+                     _ yz: Matrix4x4.Scalar,
+                     _ zx: Matrix4x4.Scalar,
+                     _ zy: Matrix4x4.Scalar) -> Matrix4x4 {
+    Matrix4x4(rows: [
+        [  1,  xy,  xz,   0  ],
+        [ yx,   1,  yz,   0  ],
+        [ zx,  zy,   1,   0  ],
+        [ 0,    0,   0,   1  ],
+    ])
+}

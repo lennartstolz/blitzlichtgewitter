@@ -473,3 +473,43 @@ final class Matrix4x4RotationTests : XCTestCase {
     }
 
 }
+
+final class Matrix4x4ShearingTests : XCTestCase {
+
+    func testAShearingTransformationMovesXInProportionToY() {
+        let transform = shearing(1, 0, 0, 0, 0, 0)
+        let p = point(2, 3, 4)
+        XCTAssertEqual(transform * p, point(5, 3, 4))
+    }
+
+    func testAShearingTransformationMovesXInProportionToZ() {
+        let transform = shearing(0, 1, 0, 0, 0, 0)
+        let p = point(2, 3, 4)
+        XCTAssertEqual(transform * p, point(6, 3, 4))
+    }
+
+    func testAShearingTransformationMovesYInProportionToX() {
+        let transform = shearing(0, 0, 1, 0, 0, 0)
+        let p = point(2, 3, 4)
+        XCTAssertEqual(transform * p, point(2, 5, 4))
+    }
+
+    func testAShearingTransformationMovesYInProportionToZ() {
+        let transform = shearing(0, 0, 0, 1, 0, 0)
+        let p = point(2, 3, 4)
+        XCTAssertEqual(transform * p, point(2, 7, 4))
+    }
+
+    func testAShearingTransformationMovesZInProportionToX() {
+        let transform = shearing(0, 0, 0, 0, 1, 0)
+        let p = point(2, 3, 4)
+        XCTAssertEqual(transform * p, point(2, 3, 6))
+    }
+
+    func testAShearingTransformationMovesZInProportionToY() {
+        let transform = shearing(0, 0, 0, 0, 0, 1)
+        let p = point(2, 3, 4)
+        XCTAssertEqual(transform * p, point(2, 3, 7))
+    }
+
+}
