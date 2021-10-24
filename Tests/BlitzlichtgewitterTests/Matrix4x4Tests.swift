@@ -537,5 +537,66 @@ final class Matrix4x4ChainingTransformationTests : XCTestCase {
         let t = c * b * a
         XCTAssertEqual(t * p, point(15, 0, 7))
     }
+}
+
+final class Matrix4x4PuttingItTogetherTests : XCTestCase {
+
+    func testDrawingTheFlagOfTheEuropeanUnionWithMatrixOperations() throws {
+
+        let reflexBlue: Color = [ 0, 51/255, 153/255 ]
+        let gold: Color = [ 1, 204/255, 0 ]
+
+        let size: Double = 128
+        var canvas = Canvas(width: Int(size), height: Int(size), color: reflexBlue)
+
+        var deg:Double = 0
+        while deg < 360 {
+            let p = point(0, 0.7, 0)
+            let rotation = rotation_z(deg: deg)
+            let sp = rotation * p * (size / 2)
+            let x = Int(size / 2  + sp.x)
+            let y = Int(size / 2 + sp.y)
+            canvas.drawStar(x, y, color: gold)
+            deg += 30
+        }
+
+        let reference = try XCTUnwrap(Canvas(testResourceNamed: "flag-eu-reference-image"))
+        XCTAssertEqual(canvas, reference)
+    }
+
+}
+
+private extension Canvas {
+
+    /// Convenient way to "manually" draw a start-like image in a canvas at the given position.
+    mutating func drawStar(_ x: Int, _ y: Int, color: Color) {
+        self[   x, y-3] = color
+        self[ x-1, y-2] = color
+        self[   x, y-2] = color
+        self[ x+1, y-2] = color
+        self[ x-3, y-1] = color
+        self[ x-2, y-1] = color
+        self[ x-1, y-1] = color
+        self[   x, y-1] = color
+        self[ x+1, y-1] = color
+        self[ x+2, y-1] = color
+        self[ x+3, y-1] = color
+        self[ x-2,   y] = color
+        self[ x-1,   y] = color
+        self[   x,   y] = color
+        self[ x+1,   y] = color
+        self[ x+2,   y] = color
+        self[ x-1, y+1] = color
+        self[   x, y+1] = color
+        self[ x+1, y+1] = color
+        self[ x-2, y+2] = color
+        self[ x-1, y+2] = color
+        self[ x+1, y+2] = color
+        self[ x+2, y+2] = color
+        self[ x-3, y+3] = color
+        self[ x-2, y+3] = color
+        self[ x+2, y+3] = color
+        self[ x+3, y+3] = color
+    }
 
 }
