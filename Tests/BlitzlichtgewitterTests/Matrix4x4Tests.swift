@@ -513,3 +513,29 @@ final class Matrix4x4ShearingTests : XCTestCase {
     }
 
 }
+
+final class Matrix4x4ChainingTransformationTests : XCTestCase {
+
+    func testIndividualTransformationAreAppliedInSequence() {
+        let p = point(1, 0, 1)
+        let a = rotation_x(rad: .pi / 2)
+        let b = scaling(5, 5, 5)
+        let c = translation(10, 5, 7)
+        let p2 = a * p
+        XCTAssertEqual(p2, point(1, -1, 0))
+        let p3 = b * p2
+        XCTAssertEqual(p3, point(5, -5, 0))
+        let p4 = c * p3
+        XCTAssertEqual(p4, point(15, 0, 7))
+    }
+
+    func testChainedTransformationsMustBeAppliedInReverseOrder() {
+        let p = point(1, 0, 1)
+        let a = rotation_x(rad: .pi / 2)
+        let b = scaling(5, 5, 5)
+        let c = translation(10, 5, 7)
+        let t = c * b * a
+        XCTAssertEqual(t * p, point(15, 0, 7))
+    }
+
+}
