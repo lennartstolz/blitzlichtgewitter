@@ -206,7 +206,7 @@ private extension String {
 
 }
 
-private extension Canvas {
+extension Canvas {
 
     /// Initializes and returns the canvas from the specified resource from the test bundles `Resources` directory.
     ///
