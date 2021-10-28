@@ -18,3 +18,42 @@ final class RayTests : XCTestCase {
     }
 
 }
+
+final class RaySphereIntersectionTests : XCTestCase {
+
+    func testARayIntersectsASphereAtTwoPoints() {
+        let r = Ray(origin: point(0, 0, -5), direction: vector(0, 0, 1))
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let xs = r.intersect(sphere: s)
+        XCTAssertEqual(xs, .intersection(4.0, 6.0))
+    }
+
+    func testARayIntersectsASphereAtATangent() {
+        let r = Ray(origin: point(0, 1, -5), direction: vector(0, 0, 1))
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let xs = r.intersect(sphere: s)
+        XCTAssertEqual(xs, .intersection(5.0, 5.0))
+    }
+
+    func testARayMissesASphere() {
+        let r = Ray(origin: point(0, 2, -5), direction: vector(0, 0, 1))
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let xs = r.intersect(sphere: s)
+        XCTAssertEqual(xs, .miss)
+    }
+
+    func testARayOriginatesInsideASphere() {
+        let r = Ray(origin: point(0, 0, 0), direction: vector(0, 0, 1))
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let xs = r.intersect(sphere: s)
+        XCTAssertEqual(xs, .intersection(-1, 1))
+    }
+
+    func testASphereBehindARay() {
+        let r = Ray(origin: point(0, 0, 5), direction: vector(0, 0, 1))
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let xs = r.intersect(sphere: s)
+        XCTAssertEqual(xs, .intersection(-6, -4))
+    }
+
+}
