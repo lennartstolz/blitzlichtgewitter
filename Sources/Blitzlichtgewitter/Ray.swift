@@ -38,3 +38,32 @@ extension Ray {
     }
 
 }
+
+// MARK: Intersecting Rays with Spheres
+
+extension Ray {
+
+    /// Returns the intersection of a ray and a sphere.
+    ///
+    /// - Parameters:
+    ///     - sphere: The sphere to calculate the intersection.
+    ///
+    /// - Returns: The intersection points of a ray and a sphere.
+    public func intersect(sphere: Sphere) -> Intersection {
+
+        let sphereToRay = origin - sphere.origin
+        let a = dot(direction, direction)
+        let b = 2 * dot(direction, sphereToRay)
+        let c = dot(sphereToRay, sphereToRay) - 1
+
+        let discriminant = (b*b) - 4 * a * c
+
+        guard discriminant >= 0 else { return .miss }
+
+        let t1 = (-b - sqrt(discriminant)) / (2 * a)
+        let t2 = (-b + sqrt(discriminant)) / (2 * a)
+
+        return .intersection(t1, t2)
+    }
+
+}
