@@ -49,7 +49,7 @@ extension Ray {
     ///     - sphere: The sphere to calculate the intersection.
     ///
     /// - Returns: The intersection points of a ray and a sphere.
-    public func intersect(sphere: Sphere) -> Intersection {
+    public func intersect(sphere: Sphere) -> IntersectionResult<Sphere> {
 
         let sphereToRay = origin - sphere.origin
         let a = dot(direction, direction)
@@ -63,7 +63,7 @@ extension Ray {
         let t1 = (-b - sqrt(discriminant)) / (2 * a)
         let t2 = (-b + sqrt(discriminant)) / (2 * a)
 
-        return .intersection(t1, t2)
+        return [Intersection(t: t1, object: sphere), Intersection(t: t2, object: sphere)]
     }
 
 }

@@ -1,18 +1,22 @@
 import Foundation
 
 /// A data structure representing the intersection of a ray and an object.
-///
-/// ## Implementation Details
-///
-/// This abstraction may be over-engineered and superfluous because maybe an optional type could do the job as well.
-public enum Intersection {
-    /// The ray didn't hit the object (e.g. the ``Sphere``).
-    case miss
-    /// The ray hit the object for the given "time" value.
-    ///
-    /// This case will always return two intersections. In case the ray only tangents a surface (which results only in
-    /// one intersection) this case will provide the same value twice. This helps to determine object overlaps.
-    case intersection(_ t1: Double, _ t2: Double)
-}
+public struct Intersection<Object> {
 
-extension Intersection : Equatable { }
+    /// The time value when the ray hits the object.
+    public let t: Double
+
+    /// The object hit by the ray at the given time value.
+    public let object: Object
+
+    /// Creates a new intersection.
+    ///
+    /// - Parameters:
+    ///     - t: The time value when the ray hits the object.
+    ///     - object: The object hit by the ray at the given time value.
+    public init(t: Double, object: Object) {
+        self.t = t
+        self.object = object
+    }
+
+}
