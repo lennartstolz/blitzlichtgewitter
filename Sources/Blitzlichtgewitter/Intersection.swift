@@ -20,3 +20,5 @@ public struct Intersection<Object> {
     }
 
 }
+
+extension Intersection : Equatable where Object : Equatable { }

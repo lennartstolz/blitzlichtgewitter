@@ -26,3 +26,16 @@ public func intersections<Object>(_ i: Intersection<Object>...) -> IntersectionR
 
 /// Aggregate a list of intersection results to a _single_ intersection result object.
 public func intersections<Object>(_ i: IntersectionResult<Object>...) -> IntersectionResult<Object> { i.reduce([], +) }
+
+/// Identifies and returns the hit from the given intersection results.
+///
+/// - Parameters:
+///     - intersections: A list of intersection records.
+///
+/// - Returns: The intersection with the lowest nonnegative t value.
+public func hit<Object>(_ intersections: IntersectionResult<Object>) -> Intersection<Object>? {
+    intersections
+        .filter({ $0.t >= 0 })
+        .sorted(by: { $0.t < $1.t })
+        .first
+}
