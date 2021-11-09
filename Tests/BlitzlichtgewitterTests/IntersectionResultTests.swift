@@ -28,3 +28,45 @@ final class IntersectionResultTests : XCTestCase {
     }
 
 }
+
+final class HitTests : XCTestCase {
+
+    func testTheHitWhenAllIntersectionsHavePositiveT() {
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let i1 = Intersection(t: 1, object: s)
+        let i2 = Intersection(t: 1, object: s)
+        let xs = intersections(i1, i2)
+        let i = hit(xs)
+        XCTAssertEqual(i, i1)
+    }
+
+    func testTheHitWhenSomeIntersectionsHaveNegativeT() {
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let i1 = Intersection(t: -1, object: s)
+        let i2 = Intersection(t: 1, object: s)
+        let xs = intersections(i1, i2)
+        let i = hit(xs)
+        XCTAssertEqual(i, i2)
+    }
+
+    func testTheHitWhenAllIntersectionsHaveNegativeT() {
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let i1 = Intersection(t: -2, object: s)
+        let i2 = Intersection(t: -1, object: s)
+        let xs = intersections(i1, i2)
+        let i = hit(xs)
+        XCTAssertNil(i)
+    }
+
+    func testTheHitIsAlwaysTheLowestNonnegativeIntersection() {
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let i1 = Intersection(t:  5, object: s)
+        let i2 = Intersection(t:  7, object: s)
+        let i3 = Intersection(t: -3, object: s)
+        let i4 = Intersection(t:  2, object: s)
+        let xs = intersections(i1, i2, i3, i4)
+        let i = hit(xs)
+        XCTAssertEqual(i, i4)
+    }
+
+}
