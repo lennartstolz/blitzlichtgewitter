@@ -21,3 +21,5 @@ public struct Sphere {
     }
 
 }
+
+extension Sphere : Equatable { }
