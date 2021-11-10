@@ -74,3 +74,37 @@ final class RaySphereIntersectionTests : XCTestCase {
     }
 
 }
+
+final class RayTransformationTests : XCTestCase {
+
+    func testTranslatingARay() {
+        let r = Ray(origin: point(1, 2, 3), direction: vector(0, 1, 0))
+        let m = translation(3, 4, 5)
+        let r2 = r.transformed(by: m)
+        XCTAssertEqual(r2.origin, point(4, 6, 8))
+        XCTAssertEqual(r2.direction, vector(0, 1, 0))
+    }
+
+    func testScalingARay() {
+        let r = Ray(origin: point(1, 2, 3), direction: vector(0, 1, 0))
+        let m = scaling(2, 3, 4)
+        let r2 = r.transformed(by: m)
+        XCTAssertEqual(r2.origin, point(2, 6, 12))
+        XCTAssertEqual(r2.direction, vector(0, 3, 0))
+    }
+
+}
+
+final class RayTransformedSphereIntersectionTests : XCTestCase {
+
+    func testIntersectingAScaledSphereWithARay() {
+        let r = Ray(origin: point(0, 0, -5), direction: vector(0, 0, 1))
+        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        s.transform = scaling(2, 2, 2)
+        let xs = r.intersect(sphere: s)
+        XCTAssertEqual(xs.count, 2)
+        XCTAssertEqual(xs[0].t, 3)
+        XCTAssertEqual(xs[1].t, 7)
+    }
+
+}

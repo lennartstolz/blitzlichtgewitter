@@ -50,7 +50,20 @@ extension Ray {
     ///
     /// - Returns: The intersection points of a ray and a sphere.
     public func intersect(sphere: Sphere) -> IntersectionResult<Sphere> {
+        transformed(by: sphere.transform.inverse)._intersect(sphere: sphere)
+    }
 
+    /// Returns the intersection of a ray and a sphere.
+    ///
+    /// # Implementation Details
+    ///
+    /// While implementing the `transform` matrix of the sphere, we split the logic of the intersection calculation
+    /// into those two methods. The public interface does transform the ray (by the inverse of the sphere's transform
+    /// matrix. Afterwards this method is called to caculate the intersections between the modified ray and the sphere.
+    ///
+    /// This split may be a superfluous indirection but we kept it for now, as the intersection calculation is still
+    /// under construction.
+    private func _intersect(sphere: Sphere) -> IntersectionResult<Sphere> {
         let sphereToRay = origin - sphere.origin
         let a = dot(direction, direction)
         let b = 2 * dot(direction, sphereToRay)
@@ -64,6 +77,22 @@ extension Ray {
         let t2 = (-b + sqrt(discriminant)) / (2 * a)
 
         return [Intersection(t: t1, object: sphere), Intersection(t: t2, object: sphere)]
+    }
+
+}
+
+// MARK: Transforming Rays
+
+extension Ray {
+
+    /// Returns a new ray that represents the original ray after applying the transformation.
+    ///
+    /// - Parameters:
+    ///     - matrix: The translation applied to the ray.
+    ///
+    /// - Returns: A new ray that represents the original ray after applying the transformation.
+    public func transformed(by matrix: Matrix4x4) -> Ray {
+        Ray(origin: matrix * origin, direction:  matrix * direction)
     }
 
 }
