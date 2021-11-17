@@ -28,3 +28,20 @@ public struct Sphere {
 }
 
 extension Sphere : Equatable { }
+
+// MARK: Surface Normal
+
+extension Sphere {
+
+    /// Returns the (surface) normal at the given point.
+    ///
+    /// A _surface normal_ (or just _normal_) is a vector that points perpendicular to a surface at a given point.
+    /// [The Ray Tracer Challenge, p. 76](http://raytracerchallenge.com/).
+    ///
+    /// - Returns: The (surface) normal at the given point.
+    public func normal(at p: Tuple) -> Tuple {
+        assert(p.isPoint)
+        return (p - point(0, 0, 0)).normalized()
+    }
+
+}
