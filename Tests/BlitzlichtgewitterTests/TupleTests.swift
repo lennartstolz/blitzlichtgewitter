@@ -182,3 +182,21 @@ final class TupleCrossProductTests : XCTestCase {
     }
 
 }
+
+final class TupleReflectingTests : XCTestCase {
+
+    func testReflectingAVectorApproachingAt45Degree() {
+        let v = vector(1, -1, 0)
+        let n = vector(0, 1, 0)
+        let r = reflect(v, n)
+        XCTAssertEqual(r, vector(1, 1, 0))
+    }
+
+    func testReflectingAVectorOffASlantedSurface() {
+        let v = vector(0, -1, 0)
+        let n = vector(sqrt(2)/2, sqrt(2)/2, 0)
+        let r = reflect(v, n)
+        XCTAssertEqual(r, vector(1, 0, 0))
+    }
+
+}
