@@ -39,9 +39,13 @@ extension Sphere {
     /// [The Ray Tracer Challenge, p. 76](http://raytracerchallenge.com/).
     ///
     /// - Returns: The (surface) normal at the given point.
-    public func normal(at p: Tuple) -> Tuple {
-        assert(p.isPoint)
-        return (p - point(0, 0, 0)).normalized()
+    public func normal(at worldPoint: Tuple) -> Tuple {
+        assert(worldPoint.isPoint)
+        let objectPoint = self.transform.inverse * worldPoint
+        let objectNormal = objectPoint - point(0, 0, 0)
+        var worldNormal = self.transform.inverse.transposed() * objectNormal
+        worldNormal = tuple(worldNormal.x, worldNormal.y, worldNormal.z, 0)
+        return worldNormal.normalized()
     }
 
 }
