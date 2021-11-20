@@ -59,4 +59,19 @@ final class SphereNormalTests : XCTestCase {
         XCTAssertEqual(n, n.normalized())
     }
 
+    func testComputingTheNormalOnATranslatedSphere() {
+        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        s.transform = translation(0, 1, 0)
+        let n = s.normal(at: point(0, 1.70711, -0.70711))
+        XCTAssertEqual(n, vector(0, 0.70711, -0.70711))
+    }
+
+    func testComputingTheNormalOnATransformedSphere() {
+        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let m = scaling(1, 0.5, 1) * rotation_z(rad: .pi / 5)
+        s.transform = m
+        let n = s.normal(at: point(0, sqrt(2)/2, -sqrt(2)/2))
+        XCTAssertEqual(n, vector(0, 0.97014, -0.24254))
+    }
+
 }
