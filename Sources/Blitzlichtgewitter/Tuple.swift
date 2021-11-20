@@ -272,3 +272,14 @@ public func cross(_ lhs: Tuple, _ rhs: Tuple) -> Tuple {
                   lhs.z * rhs.x - lhs.x * rhs.z,
                   lhs.x * rhs.y - lhs.y * rhs.x)
 }
+
+// MARK: Reflecting Vectors
+
+/// Returns the reflection direction of an incident vector and a normal vector.
+///
+/// - Returns: The reflection direction of an incident vector and a normal vector.
+public func reflect(_ vector: Tuple, _ normal: Tuple) -> Tuple {
+    assert(vector.isVector)
+    assert(normal.isVector)
+    return vector - normal * 2 * dot(vector, normal)
+}
