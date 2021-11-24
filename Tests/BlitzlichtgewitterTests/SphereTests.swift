@@ -75,3 +75,21 @@ final class SphereNormalTests : XCTestCase {
     }
 
 }
+
+final class SphereMaterialTests : XCTestCase {
+
+    func testASphereHasADefaultMaterial() {
+        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let m = s.material
+        XCTAssertEqual(m, Material())
+    }
+
+    func testASphereMayBeAssignedAMaterial() {
+        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var m = Material()
+        m.ambient = 1.0
+        s.material = m
+        XCTAssertEqual(s.material, m)
+    }
+
+}
