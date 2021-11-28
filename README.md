@@ -3,6 +3,7 @@
 Blitzlichtgewitter is a (slow) ray tracer written in Swift.
 
 [![build](https://github.com/lennartstolz/blitzlichtgewitter/actions/workflows/build.yml/badge.svg)](https://github.com/lennartstolz/blitzlichtgewitter/actions/workflows/build.yml)
+[![test](https://github.com/lennartstolz/blitzlichtgewitter/actions/workflows/test.yml/badge.svg)](https://github.com/lennartstolz/blitzlichtgewitter/actions/workflows/test.yml)
 
 It loosely follows the steps described in [The Ray Tracer Challenge](http://raytracerchallenge.com/) by Jamis Buck.
 
