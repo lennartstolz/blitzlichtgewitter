@@ -89,7 +89,7 @@ final class LightningRenderingTests : XCTestCase {
 
     func testDrawTranslatedSphere() throws {
 
-        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var s: Sphere = .unit
         s.transform = translation(0, 0, 1.5)
 
         s.material.color = .greenery
@@ -106,7 +106,7 @@ final class LightningRenderingTests : XCTestCase {
     }
 
     func testDrawTranslatedAndScaledSphere() throws {
-        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var s: Sphere = .unit
         s.transform = scaling(1, 0.5, 1) * translation(0, 0, 1.5)
         s.material.color = .livingCoral
 
@@ -122,7 +122,7 @@ final class LightningRenderingTests : XCTestCase {
     }
 
     func testDrawTranslatedScaledAndRotatedSphere() throws {
-        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var s: Sphere = .unit
         s.transform = rotation_z(rad: .pi / 4) * scaling(1, 0.5, 1) * translation(0, 0, 1.5)
         s.material.color = .classicBlue
 
@@ -138,7 +138,7 @@ final class LightningRenderingTests : XCTestCase {
     }
 
     func testDrawTranslatedScaledAndSkewedSphere() throws {
-        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var s: Sphere = .unit
         s.transform = shearing(1, 0, 0, 0, 0, 0) * scaling(0.5, 1, 1) * translation(0, 0, 2)
         s.material.color = .ultraViolet
 

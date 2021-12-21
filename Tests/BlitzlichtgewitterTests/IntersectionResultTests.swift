@@ -4,7 +4,7 @@ import Blitzlichtgewitter
 final class IntersectionResultTests : XCTestCase {
 
     func testAggregatingIntersections() {
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let i1 = Intersection(t: 1, object: s)
         let i2 = Intersection(t: 2, object: s)
         let xs = intersections(i1, i2)
@@ -16,7 +16,7 @@ final class IntersectionResultTests : XCTestCase {
     func testAggregatingIntersectionResults() {
         let r1 = Ray(origin: point(0, 0, 0), direction: vector(0, 0, 1))
         let r2 = Ray(origin: point(0, 0, -5), direction: vector(0, 0, 1))
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let xs1 = r1.intersect(sphere: s)
         let xs2 = r2.intersect(sphere: s)
         let xs = intersections(xs1, xs2)
@@ -32,7 +32,7 @@ final class IntersectionResultTests : XCTestCase {
 final class HitTests : XCTestCase {
 
     func testTheHitWhenAllIntersectionsHavePositiveT() {
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let i1 = Intersection(t: 1, object: s)
         let i2 = Intersection(t: 1, object: s)
         let xs = intersections(i1, i2)
@@ -41,7 +41,7 @@ final class HitTests : XCTestCase {
     }
 
     func testTheHitWhenSomeIntersectionsHaveNegativeT() {
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let i1 = Intersection(t: -1, object: s)
         let i2 = Intersection(t: 1, object: s)
         let xs = intersections(i1, i2)
@@ -50,7 +50,7 @@ final class HitTests : XCTestCase {
     }
 
     func testTheHitWhenAllIntersectionsHaveNegativeT() {
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let i1 = Intersection(t: -2, object: s)
         let i2 = Intersection(t: -1, object: s)
         let xs = intersections(i1, i2)
@@ -59,7 +59,7 @@ final class HitTests : XCTestCase {
     }
 
     func testTheHitIsAlwaysTheLowestNonnegativeIntersection() {
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let i1 = Intersection(t:  5, object: s)
         let i2 = Intersection(t:  7, object: s)
         let i3 = Intersection(t: -3, object: s)

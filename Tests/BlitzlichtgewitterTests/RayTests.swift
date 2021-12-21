@@ -24,7 +24,7 @@ final class RaySphereIntersectionTests : XCTestCase {
 
     func testARayIntersectsASphereAtTwoPoints() {
         let r = Ray(origin: point(0, 0, -5), direction: vector(0, 0, 1))
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let xs = r.intersect(sphere: s)
         XCTAssertEqual(xs.count, 2)
         XCTAssertEqual(xs[0].t, 4.0)
@@ -33,7 +33,7 @@ final class RaySphereIntersectionTests : XCTestCase {
 
     func testARayIntersectsASphereAtATangent() {
         let r = Ray(origin: point(0, 1, -5), direction: vector(0, 0, 1))
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let xs = r.intersect(sphere: s)
         XCTAssertEqual(xs.count, 2)
         XCTAssertEqual(xs[0].t, 5.0)
@@ -42,14 +42,14 @@ final class RaySphereIntersectionTests : XCTestCase {
 
     func testARayMissesASphere() {
         let r = Ray(origin: point(0, 2, -5), direction: vector(0, 0, 1))
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let xs = r.intersect(sphere: s)
         XCTAssertTrue(xs.isEmpty)
     }
 
     func testARayOriginatesInsideASphere() {
         let r = Ray(origin: point(0, 0, 0), direction: vector(0, 0, 1))
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let xs = r.intersect(sphere: s)
         XCTAssertEqual(xs.count, 2)
         XCTAssertEqual(xs[0].t, -1.0)
@@ -58,7 +58,7 @@ final class RaySphereIntersectionTests : XCTestCase {
 
     func testASphereBehindARay() {
         let r = Ray(origin: point(0, 0, 5), direction: vector(0, 0, 1))
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let xs = r.intersect(sphere: s)
         XCTAssertEqual(xs.count, 2)
         XCTAssertEqual(xs[0].t, -6.0)
@@ -67,7 +67,7 @@ final class RaySphereIntersectionTests : XCTestCase {
 
     func testIntersectSetsTheObjectOnTheIntersection() {
         let r = Ray(origin: point(0, 0, -5), direction: vector(0, 0, 1))
-        let s = Sphere(origin: point(0, 0, 0), radius: 1)
+        let s: Sphere = .unit
         let xs = r.intersect(sphere: s)
         XCTAssertEqual(xs.count, 2)
         XCTAssertEqual(xs[0].object, s)
@@ -100,7 +100,7 @@ final class RayTransformedSphereIntersectionTests : XCTestCase {
 
     func testIntersectingAScaledSphereWithARay() {
         let r = Ray(origin: point(0, 0, -5), direction: vector(0, 0, 1))
-        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var s: Sphere = .unit
         s.transform = scaling(2, 2, 2)
         let xs = r.intersect(sphere: s)
         XCTAssertEqual(xs.count, 2)
@@ -131,7 +131,7 @@ final class SphereDrawingTests : XCTestCase {
     }
 
     func testDrawTranslatedSphere() throws {
-        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var s: Sphere = .unit
         s.transform = translation(0, 0, 1.5)
 
         var c = Canvas(width: size, height: size, color: .black)
@@ -144,7 +144,7 @@ final class SphereDrawingTests : XCTestCase {
     }
 
     func testDrawTranslatedAndScaledSphere() throws {
-        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var s: Sphere = .unit
         s.transform = scaling(1, 0.5, 1) * translation(0, 0, 1.5)
 
         var c = Canvas(width: size, height: size, color: .black)
@@ -157,7 +157,7 @@ final class SphereDrawingTests : XCTestCase {
     }
 
     func testDrawTranslatedScaledAndRotatedSphere() throws {
-        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var s: Sphere = .unit
         s.transform = rotation_z(rad: .pi / 4) * scaling(1, 0.5, 1) * translation(0, 0, 1.5)
 
         var c = Canvas(width: size, height: size, color: .black)
@@ -170,7 +170,7 @@ final class SphereDrawingTests : XCTestCase {
     }
 
     func testDrawTranslatedScaledAndSkewedSphere() throws {
-        var s = Sphere(origin: point(0, 0, 0), radius: 1)
+        var s: Sphere = .unit
         s.transform = shearing(1, 0, 0, 0, 0, 0) * scaling(0.5, 1, 1) * translation(0, 0, 1.5)
 
         var c = Canvas(width: size, height: size, color: .black)

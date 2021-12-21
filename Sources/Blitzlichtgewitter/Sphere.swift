@@ -57,3 +57,12 @@ extension Sphere {
     }
 
 }
+
+// MARK: Unit Sphere
+
+extension Sphere {
+
+    /// A unit sphere (radius 1) originated at the worlds' origin.
+    public static var unit : Self { Self(origin: point(0, 0, 0), radius: 1) }
+
+}

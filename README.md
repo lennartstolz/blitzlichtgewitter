@@ -22,7 +22,7 @@ The following example renders the "Result" asset from the "Phong Reflection Mode
 
 ```swift
 // 🟢 Creates a unit sphere.
-var sphere = Sphere(origin: point(0, 0, 0), radius: 1)
+var sphere: Sphere = .unit
 // ↗️ Moves the sphere by '1.5' units along the z-axis ("away" from the camera).
 sphere.transform = translation(0, 0, 1.5)
 // 🎨 Applies some beautiful color ('#88B04B').
