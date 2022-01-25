@@ -14,7 +14,7 @@ It loosely follows the steps described in [The Ray Tracer Challenge](http://rayt
 
 | Ambient Reflection  | Diffuse Reflection  | Specular Reflection |       Result        |
 | :-----------------: | :-----------------: | :-----------------: | :-----------------: |
-| <img src="../assets/readme/phong-shading-01-ambient-reflection.png?raw=true" alt="Ambient Reflection of a sphere" width="220" /> | <img src="../assets/readme/phong-shading-02-diffuse-reflection.png?raw=true" alt="Diffuse Reflection of a sphere" width="220" /> | <img src="../assets/readme/phong-shading-03-specular-reflection.png?raw=true" alt="Specular Reflection of a sphere" width="220" /> | <img src="../assets/readme/phong-shading-04-result.png?raw=true" alt="Phong Reflection Render Result of a sphere" width="220" /> |
+| <img src="../assets/readme/phong-shading-01-ambient-reflection.png?raw=true" alt="Ambient Reflection of a sphere" width="175" /> | <img src="../assets/readme/phong-shading-02-diffuse-reflection.png?raw=true" alt="Diffuse Reflection of a sphere" width="175" /> | <img src="../assets/readme/phong-shading-03-specular-reflection.png?raw=true" alt="Specular Reflection of a sphere" width="175" /> | <img src="../assets/readme/phong-shading-04-result.png?raw=true" alt="Phong Reflection Render Result of a sphere" width="175" /> |
 
 ## Usage
 
